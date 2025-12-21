@@ -1,0 +1,14 @@
+C:\Users\96181\source\repos\GYM APP\GYM APP\bin\Debug\GYM APP.exe.config
+C:\Users\96181\source\repos\GYM APP\GYM APP\bin\Debug\GYM APP.exe
+C:\Users\96181\source\repos\GYM APP\GYM APP\bin\Debug\GYM APP.pdb
+C:\Users\96181\source\repos\GYM APP\GYM APP\bin\Debug\Newtonsoft.Json.dll
+C:\Users\96181\source\repos\GYM APP\GYM APP\bin\Debug\Newtonsoft.Json.xml
+C:\Users\96181\source\repos\GYM APP\GYM APP\obj\Debug\THE GOOD GYM.csproj.AssemblyReference.cache
+C:\Users\96181\source\repos\GYM APP\GYM APP\obj\Debug\GYM_APP.Form1.resources
+C:\Users\96181\source\repos\GYM APP\GYM APP\obj\Debug\GYM_APP.Properties.Resources.resources
+C:\Users\96181\source\repos\GYM APP\GYM APP\obj\Debug\THE GOOD GYM.csproj.GenerateResource.cache
+C:\Users\96181\source\repos\GYM APP\GYM APP\obj\Debug\THE GOOD GYM.csproj.CoreCompileInputs.cache
+C:\Users\96181\source\repos\GYM APP\GYM APP\obj\Debug\THE GOOD.9F21DBCE.Up2Date
+C:\Users\96181\source\repos\GYM APP\GYM APP\obj\Debug\GYM APP.exe
+C:\Users\96181\source\repos\GYM APP\GYM APP\obj\Debug\GYM APP.pdb
+C:\Users\96181\source\repos\GYM APP\GYM APP\obj\Debug\GYM APP.exe.config
