@@ -229,5 +229,52 @@ namespace GYM_APP
             // deleted for now
 
         }
+
+        private void btnAddTrainer_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtTrainerID.Text) || 
+                string.IsNullOrWhiteSpace (txtTrainerName.Text) ||
+                cmbSpecialization.SelectedIndex == -1 ||
+                cmbTrainerGender.SelectedIndex ==-1)
+
+            {
+                MessageBox.Show("Please fill all required fields.");
+                return;
+            }
+
+            //check duplicate ID
+            foreach (Trainer tr in trainers)
+            {
+                if ( tr.TrainerID == int.Parse(txtTrainerID.Text) )
+                {
+                    MessageBox.Show("Trainer ID already exists.");
+                    return;
+                }
+            }
+
+            //Create trainer
+            Trainer t = new Trainer();
+            t.TrainerID = int.Parse(txtTrainerID.Text);
+            t.Name = txtTrainerName.Text;
+            t.Specialization = cmbSpecialization.Text;
+            t.Gender = cmbTrainerGender.Text;
+
+            //Add to list
+            trainers.Add(t);
+
+            // Add to Datagridview
+            dgvTrainers.Rows.Add(t.TrainerID, t.Name, t.Specialization, t.Gender);
+
+            // Clear fields
+            txtTrainerID.Clear();
+            txtTrainerName.Clear(); 
+            cmbSpecialization.SelectedIndex = -1;
+            cmbTrainerGender.SelectedIndex = -1;
+        }
+
+        private void tabMembers_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

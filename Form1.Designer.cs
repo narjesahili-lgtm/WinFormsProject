@@ -37,6 +37,7 @@
             this.colActive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.colEnrolled = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnDeleteMember = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.cmbMemberGender = new System.Windows.Forms.ComboBox();
@@ -48,14 +49,30 @@
             this.cmbMembershipType = new System.Windows.Forms.ComboBox();
             this.chkMemberActive = new System.Windows.Forms.CheckBox();
             this.tabTrainers = new System.Windows.Forms.TabPage();
+            this.dgvTrainers = new System.Windows.Forms.DataGridView();
+            this.colTrainerID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTrainerName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colSpecialization = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.colTrainerGender = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.grpTrainer = new System.Windows.Forms.GroupBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnUpdateTrainer = new System.Windows.Forms.Button();
+            this.btnAddTrainer = new System.Windows.Forms.Button();
+            this.cmbTrainerGender = new System.Windows.Forms.ComboBox();
+            this.cmbSpecialization = new System.Windows.Forms.ComboBox();
+            this.txtTrainerName = new System.Windows.Forms.TextBox();
+            this.txtTrainerID = new System.Windows.Forms.TextBox();
             this.tabClasses = new System.Windows.Forms.TabPage();
             this.tabBooking = new System.Windows.Forms.TabPage();
             this.tabReports = new System.Windows.Forms.TabPage();
-            this.btnDeleteMember = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabMembers.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvMembers)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.tabTrainers.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTrainers)).BeginInit();
+            this.grpTrainer.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -83,6 +100,7 @@
             this.tabMembers.TabIndex = 0;
             this.tabMembers.Text = "Members";
             this.tabMembers.UseVisualStyleBackColor = true;
+            this.tabMembers.Click += new System.EventHandler(this.tabMembers_Click);
             // 
             // dgvMembers
             // 
@@ -164,6 +182,16 @@
             this.groupBox1.TabIndex = 7;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "groupBox1";
+            // 
+            // btnDeleteMember
+            // 
+            this.btnDeleteMember.Location = new System.Drawing.Point(5, 370);
+            this.btnDeleteMember.Name = "btnDeleteMember";
+            this.btnDeleteMember.Size = new System.Drawing.Size(180, 23);
+            this.btnDeleteMember.TabIndex = 11;
+            this.btnDeleteMember.Text = "Delete Member";
+            this.btnDeleteMember.UseVisualStyleBackColor = true;
+            this.btnDeleteMember.Click += new System.EventHandler(this.btnDeleteMember_Click);
             // 
             // label2
             // 
@@ -268,6 +296,8 @@
             // 
             // tabTrainers
             // 
+            this.tabTrainers.Controls.Add(this.dgvTrainers);
+            this.tabTrainers.Controls.Add(this.grpTrainer);
             this.tabTrainers.Location = new System.Drawing.Point(4, 25);
             this.tabTrainers.Name = "tabTrainers";
             this.tabTrainers.Padding = new System.Windows.Forms.Padding(3);
@@ -275,6 +305,151 @@
             this.tabTrainers.TabIndex = 1;
             this.tabTrainers.Text = "Trainers";
             this.tabTrainers.UseVisualStyleBackColor = true;
+            // 
+            // dgvTrainers
+            // 
+            this.dgvTrainers.AllowUserToAddRows = false;
+            this.dgvTrainers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvTrainers.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.colTrainerID,
+            this.colTrainerName,
+            this.colSpecialization,
+            this.colTrainerGender});
+            this.dgvTrainers.EditMode = System.Windows.Forms.DataGridViewEditMode.EditOnEnter;
+            this.dgvTrainers.Location = new System.Drawing.Point(412, 6);
+            this.dgvTrainers.MultiSelect = false;
+            this.dgvTrainers.Name = "dgvTrainers";
+            this.dgvTrainers.RowHeadersWidth = 51;
+            this.dgvTrainers.RowTemplate.Height = 24;
+            this.dgvTrainers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvTrainers.Size = new System.Drawing.Size(372, 410);
+            this.dgvTrainers.TabIndex = 1;
+            // 
+            // colTrainerID
+            // 
+            this.colTrainerID.HeaderText = "Trainer ID";
+            this.colTrainerID.MinimumWidth = 6;
+            this.colTrainerID.Name = "colTrainerID";
+            this.colTrainerID.ReadOnly = true;
+            this.colTrainerID.Width = 125;
+            // 
+            // colTrainerName
+            // 
+            this.colTrainerName.HeaderText = "Name";
+            this.colTrainerName.MinimumWidth = 6;
+            this.colTrainerName.Name = "colTrainerName";
+            this.colTrainerName.ReadOnly = true;
+            this.colTrainerName.Width = 125;
+            // 
+            // colSpecialization
+            // 
+            this.colSpecialization.HeaderText = "Specialization";
+            this.colSpecialization.MinimumWidth = 6;
+            this.colSpecialization.Name = "colSpecialization";
+            this.colSpecialization.ReadOnly = true;
+            this.colSpecialization.Width = 125;
+            // 
+            // colTrainerGender
+            // 
+            this.colTrainerGender.HeaderText = "Gender";
+            this.colTrainerGender.MinimumWidth = 6;
+            this.colTrainerGender.Name = "colTrainerGender";
+            this.colTrainerGender.ReadOnly = true;
+            this.colTrainerGender.Width = 125;
+            // 
+            // grpTrainer
+            // 
+            this.grpTrainer.Controls.Add(this.label4);
+            this.grpTrainer.Controls.Add(this.label3);
+            this.grpTrainer.Controls.Add(this.btnUpdateTrainer);
+            this.grpTrainer.Controls.Add(this.btnAddTrainer);
+            this.grpTrainer.Controls.Add(this.cmbTrainerGender);
+            this.grpTrainer.Controls.Add(this.cmbSpecialization);
+            this.grpTrainer.Controls.Add(this.txtTrainerName);
+            this.grpTrainer.Controls.Add(this.txtTrainerID);
+            this.grpTrainer.Location = new System.Drawing.Point(3, 0);
+            this.grpTrainer.Name = "grpTrainer";
+            this.grpTrainer.Size = new System.Drawing.Size(403, 422);
+            this.grpTrainer.TabIndex = 0;
+            this.grpTrainer.TabStop = false;
+            this.grpTrainer.Text = "  ";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 92);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(100, 16);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Trainer\'s Name";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(4, 18);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(76, 16);
+            this.label3.TabIndex = 6;
+            this.label3.Text = "Trainer\'s ID";
+            // 
+            // btnUpdateTrainer
+            // 
+            this.btnUpdateTrainer.Location = new System.Drawing.Point(9, 359);
+            this.btnUpdateTrainer.Name = "btnUpdateTrainer";
+            this.btnUpdateTrainer.Size = new System.Drawing.Size(116, 23);
+            this.btnUpdateTrainer.TabIndex = 5;
+            this.btnUpdateTrainer.Text = "Update Trainer";
+            this.btnUpdateTrainer.UseVisualStyleBackColor = true;
+            // 
+            // btnAddTrainer
+            // 
+            this.btnAddTrainer.Location = new System.Drawing.Point(7, 306);
+            this.btnAddTrainer.Name = "btnAddTrainer";
+            this.btnAddTrainer.Size = new System.Drawing.Size(117, 23);
+            this.btnAddTrainer.TabIndex = 4;
+            this.btnAddTrainer.Text = "Add Trainer";
+            this.btnAddTrainer.UseVisualStyleBackColor = true;
+            this.btnAddTrainer.Click += new System.EventHandler(this.btnAddTrainer_Click);
+            // 
+            // cmbTrainerGender
+            // 
+            this.cmbTrainerGender.FormattingEnabled = true;
+            this.cmbTrainerGender.Items.AddRange(new object[] {
+            "Female",
+            "Male"});
+            this.cmbTrainerGender.Location = new System.Drawing.Point(3, 236);
+            this.cmbTrainerGender.Name = "cmbTrainerGender";
+            this.cmbTrainerGender.Size = new System.Drawing.Size(121, 24);
+            this.cmbTrainerGender.TabIndex = 3;
+            this.cmbTrainerGender.Text = "Gender";
+            // 
+            // cmbSpecialization
+            // 
+            this.cmbSpecialization.FormattingEnabled = true;
+            this.cmbSpecialization.Items.AddRange(new object[] {
+            "Personal Trainer",
+            "Yoga",
+            "Pilates ",
+            "Martial Arts"});
+            this.cmbSpecialization.Location = new System.Drawing.Point(4, 181);
+            this.cmbSpecialization.Name = "cmbSpecialization";
+            this.cmbSpecialization.Size = new System.Drawing.Size(121, 24);
+            this.cmbSpecialization.TabIndex = 2;
+            this.cmbSpecialization.Text = "Specialization";
+            // 
+            // txtTrainerName
+            // 
+            this.txtTrainerName.Location = new System.Drawing.Point(9, 111);
+            this.txtTrainerName.Name = "txtTrainerName";
+            this.txtTrainerName.Size = new System.Drawing.Size(320, 22);
+            this.txtTrainerName.TabIndex = 1;
+            // 
+            // txtTrainerID
+            // 
+            this.txtTrainerID.Location = new System.Drawing.Point(9, 37);
+            this.txtTrainerID.Name = "txtTrainerID";
+            this.txtTrainerID.Size = new System.Drawing.Size(320, 22);
+            this.txtTrainerID.TabIndex = 0;
             // 
             // tabClasses
             // 
@@ -306,16 +481,6 @@
             this.tabReports.Text = "Reports";
             this.tabReports.UseVisualStyleBackColor = true;
             // 
-            // btnDeleteMember
-            // 
-            this.btnDeleteMember.Location = new System.Drawing.Point(5, 370);
-            this.btnDeleteMember.Name = "btnDeleteMember";
-            this.btnDeleteMember.Size = new System.Drawing.Size(180, 23);
-            this.btnDeleteMember.TabIndex = 11;
-            this.btnDeleteMember.Text = "Delete Member";
-            this.btnDeleteMember.UseVisualStyleBackColor = true;
-            this.btnDeleteMember.Click += new System.EventHandler(this.btnDeleteMember_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -330,6 +495,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvMembers)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.tabTrainers.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvTrainers)).EndInit();
+            this.grpTrainer.ResumeLayout(false);
+            this.grpTrainer.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -360,6 +529,20 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnDeleteMember;
+        private System.Windows.Forms.GroupBox grpTrainer;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnUpdateTrainer;
+        private System.Windows.Forms.Button btnAddTrainer;
+        private System.Windows.Forms.ComboBox cmbTrainerGender;
+        private System.Windows.Forms.ComboBox cmbSpecialization;
+        private System.Windows.Forms.TextBox txtTrainerName;
+        private System.Windows.Forms.TextBox txtTrainerID;
+        private System.Windows.Forms.DataGridView dgvTrainers;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTrainerID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTrainerName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colSpecialization;
+        private System.Windows.Forms.DataGridViewTextBoxColumn colTrainerGender;
     }
 }
 
