@@ -16,11 +16,54 @@ namespace GYM_APP
         List<Member> members = new List<Member>();
         List<Trainer> trainers = new List<Trainer>();
         List<ClassSession> classes = new List<ClassSession>();
+
+        private void LoadTrainersToClassCombo()
+        {
+            cmbBookingTrainer.Items.Clear();
+
+            foreach (Trainer t in trainers)
+            {
+                cmbBookingTrainer.Items.Add(t);
+            }
+        }
+
+
+
+        private void LoadMembersToBComboBox()
+        {
+            cmbClassMember.Items.Clear();
+
+            foreach (Member m in members)
+            {
+                cmbClassMember.Items.Add(m);
+            }
+        }
+
+
+        void RefreshClassesGrid()
+        {
+            dgvClasses.Rows.Clear();
+            foreach (var c in classes)
+            {
+                dgvClasses.Rows.Add(
+                    c.SessionID,
+                    c.ClassName,
+                    c.Trainer.Name,
+                    c.ScheduleTime,
+                    c.MaxSlots,
+                    c.BookedMembers.Count
+                );
+            }
+        }
+
+
         public Form1()
         {
             InitializeComponent();
+           
         }
 
+        
         private void tabBooking_SelectedIndexChanged(object sender, EventArgs e)
         {
 
@@ -97,6 +140,7 @@ namespace GYM_APP
 
             //save the member in memory
             members.Add(m);
+            LoadMembersToBComboBox();
 
             // show the member in datagridview
             dgvMembers.Rows.Add(
@@ -120,6 +164,7 @@ namespace GYM_APP
 
 
             ClearMemberFields();
+           
 
         }
 
@@ -262,6 +307,12 @@ namespace GYM_APP
             //Add to list
             trainers.Add(t);
 
+
+ 
+            //load to combo box
+            LoadTrainersToClassCombo();
+
+
             // Add to Datagridview
             dgvTrainers.Rows.Add(t.TrainerID, t.Name, t.Specialization, t.Gender);
 
@@ -270,11 +321,193 @@ namespace GYM_APP
             txtTrainerName.Clear(); 
             cmbSpecialization.SelectedIndex = -1;
             cmbTrainerGender.SelectedIndex = -1;
+
         }
 
         private void tabMembers_Click(object sender, EventArgs e)
         {
 
         }
+
+        private void dgvTrainers_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = dgvTrainers.Rows[e.RowIndex];
+
+                txtTrainerID.Text = row.Cells["colTrainerID"].Value.ToString();
+                txtTrainerName.Text = row.Cells["colTrainerName"].Value.ToString();
+                cmbSpecialization.Text = row.Cells["colSpecialization"].Value.ToString();
+                cmbTrainerGender.Text = row.Cells["colTrainerGender"].Value.ToString();
+            }
+        }
+
+        private void btnUpdateTrainer_Click(object sender, EventArgs e)
+        {
+
+            //check if the trainer exists
+            if (dgvTrainers.CurrentRow == null) return;
+
+            // if trainer exists, edit
+            DataGridViewRow row = dgvTrainers.CurrentRow;
+
+            row.Cells["colTrainerID"].Value = txtTrainerID.Text;
+            row.Cells["colTrainerName"].Value = txtTrainerName.Text;
+            row.Cells["colSpecialization"].Value = cmbSpecialization.Text;
+            row.Cells["colTrainerGender"].Value = cmbTrainerGender.Text;
+
+
+        }
+
+        private void btnDeleteTrainer_Click(object sender, EventArgs e)
+        {
+
+            // code to remove the trainer 
+            if (dgvTrainers.CurrentRow != null)
+            {
+                dgvTrainers.Rows.Remove(dgvTrainers.CurrentRow);
+            }
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnAddClass_Click(object sender, EventArgs e)
+        {
+
+            // fields should not be empty
+            if (txtSessionID.Text == "" || txtClassName.Text == "" || txtMaxSlots.Text == "")
+            {
+                MessageBox.Show("Fill all class fields");
+                return;
+            }
+
+            if (cmbBookingTrainer.SelectedItem == null)
+            {
+                MessageBox.Show("Select a trainer");
+                return;
+            }
+            ClassSession cs = new ClassSession();
+            cs.SessionID = int.Parse(txtSessionID.Text);
+            cs.ClassName = txtClassName.Text;
+            cs.Trainer = (Trainer)cmbBookingTrainer.SelectedItem;
+            cs.ScheduleTime = dtpClassTime.Value;
+            cs.MaxSlots = int.Parse(txtMaxSlots.Text);
+            classes.Add(cs);
+            RefreshClassesGrid();
+
+
+        }
+
+        private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        { }
+            private void btnBookClass_Click(object sender, EventArgs e)
+        {
+            if (dgvClasses.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Select a class first");
+                return;
+            }
+            ClassSession selectedClass =
+                classes[dgvClasses.SelectedRows[0].Index];
+            Member selectedMember =
+                (Member)cmbBookingMember.SelectedItem;
+            if (!selectedMember.IsActive)
+            {
+                MessageBox.Show("Membership inactive");
+                return;
+            }
+            if (selectedClass.BookedMembers.Count >= selectedClass.MaxSlots)
+            {
+                MessageBox.Show("Class is full");
+                return;
+            }
+            // Gender rule
+            if (selectedMember.Gender != selectedClass.Trainer.Gender)
+            {
+                MessageBox.Show("Gender mismatch");
+                return;
+            }
+            selectedClass.BookedMembers.Add(selectedMember);
+
+            // a member must not book the same class twice
+            if (selectedClass.BookedMembers.Contains(selectedMember))
+            {
+                MessageBox.Show("Member already booked in this class");
+                return;
+            }
+
+            RefreshClassesGrid();
+            MessageBox.Show("Booking successful");
+        }
+
+      
+            private void dgvClasses_SelectionChanged(object sender, EventArgs e)
+
+        {
+
+            lstAttendance.Items.Clear();
+
+            if (dgvClasses.SelectedRows.Count == 0)
+
+                return;
+
+            ClassSession selectedClass =
+
+                classes[dgvClasses.SelectedRows[0].Index];
+
+            foreach (var m in selectedClass.BookedMembers)
+
+            {
+
+                lstAttendance.Items.Add(m.Name);
+
+            }
+
+        }
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+            string report = "";
+            foreach (var c in classes)
+            {
+                report += $"{c.ClassName} ({c.BookedMembers.Count}/{c.MaxSlots})\n";
+                foreach (var m in c.BookedMembers)
+                {
+                    report += "  - " + m.Name + "\n";
+                }
+                report += "\n";
+            }
+            MessageBox.Show(report, "Attendance Report");
+        }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvClasses_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
+    
+

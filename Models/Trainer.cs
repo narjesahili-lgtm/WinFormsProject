@@ -12,5 +12,11 @@ namespace GYM_APP.Models
         public string Name { get; set; }
         public string Specialization { get; set; }
         public string Gender { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
     }
 }

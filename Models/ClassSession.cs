@@ -10,10 +10,15 @@ namespace GYM_APP.Models
     {
         public int SessionID { get; set; }
         public string ClassName { get; set; }
-        public Trainer AssignedTrainer { get; set; }
+
+        public Trainer Trainer { get; set; }
         public DateTime ScheduleTime { get; set; }
-        public int MaxSlots { get; set; }
-        public string GenderGroup { get; set; }       
-        public List<Member> BookedMembers { get; set; } = new List<Member>();
+        public int MaxSlots { get; set; }       
+        public List<Member> BookedMembers { get; set; } 
+
+        public ClassSession()
+        {
+            BookedMembers = new List<Member>();
+        }
     }
 }
